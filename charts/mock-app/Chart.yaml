@@ -1,0 +1,6 @@
+apiVersion: v2
+name: mock-app
+description: Mocked K8s application for micro segmentation
+version: 1.0.0
+appVersion: "1.0"
+
