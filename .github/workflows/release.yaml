@@ -1,12 +1,15 @@
 name: Release Charts
 
 on:
-  push:
+  pull_request:
     branches:
-      - main
+      - master
+    types:
+      - closed  # Trigger when PR is closed (includes merges)
 
 jobs:
   release:
+    if: github.event.pull_request.merged == true  # Run only if PR was merged
     permissions:
       contents: write # to push chart release and create a release (helm/chart-releaser-action)
 
@@ -30,3 +33,4 @@ jobs:
         uses: helm/chart-releaser-action@v1.5.0
         env:
           CR_TOKEN: "${{ secrets.HELM_RELEASE_SECRET }}"
+
